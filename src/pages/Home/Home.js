@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
+import { logout } from "../../services/api";
 
 import styles from "./Home.module.css";
 
-const { Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 const menuItems = [
   {
@@ -44,6 +45,11 @@ function Home() {
     navigate(foundItem?.path || `/${item.key}`);
   };
 
+  const onLogoutClick = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <Layout className={styles.container}>
       <Sider className={styles.sider}>
@@ -56,6 +62,14 @@ function Home() {
         />
       </Sider>
       <Layout>
+        <Header className={styles.header}>
+          <div className={styles.loginInfo}>
+            Logged as {localStorage.getItem("name")}{" "}
+            <Button type="link" onClick={onLogoutClick}>
+              Logout
+            </Button>
+          </div>
+        </Header>
         <Content>
           <div className={styles.home}>
             <Outlet />

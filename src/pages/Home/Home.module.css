@@ -7,6 +7,16 @@
     height: 100%;
 }
 
+.header {
+    width: 100%;
+}
+
+.loginInfo {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+
 .home {
     margin: 50px;
 }

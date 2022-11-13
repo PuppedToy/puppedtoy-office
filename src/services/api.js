@@ -6,9 +6,14 @@ const api = axios.create({
 
 export default api;
 
+export function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("name");
+}
+
 function errorHandler(error) {
   if (error?.response?.status === 401) {
-    localStorage.removeItem("token");
+    logout();
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, Spin, Alert } from "antd";
+import jwtDecode from "jwt-decode";
 
 import { login } from "../services/api";
 
@@ -19,11 +20,13 @@ export default function Login() {
   const onFinish = async (values) => {
     const { name, password } = values;
     setIsLoading(true);
-    let token;
     try {
       const data = await login(name, password);
-      token = data.token;
+      const { token } = data;
+      const decodedToken = jwtDecode(token);
+      const { name: decodedName } = decodedToken;
       localStorage.setItem("token", token);
+      localStorage.setItem("name", decodedName);
       navigate("/");
     } catch (err) {
       console.error(err);
