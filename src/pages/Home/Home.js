@@ -14,11 +14,54 @@ const menuItems = [
     label: "Home",
   },
   {
+    key: "kingslayer",
+    label: "Kingslayer",
+    children: [
+      {
+        key: "new-game",
+        label: "New Game",
+      },
+      {
+        key: "rooms",
+        label: "Rooms",
+      },
+      {
+        key: "crew",
+        label: "Crew",
+      },
+      {
+        key: "needs",
+        label: "Needs",
+      },
+      {
+        key: "perks",
+        label: "Perks",
+      },
+    ],
+  },
+  {
     key: "test",
     path: "/test/PuppedToy",
     label: "Test",
   },
 ];
+
+const itemMapper =
+  (parent = "") =>
+  (item) => ({
+    ...item,
+    path: item.path || `${parent ? `/${parent}` : ""}/${item.key}`,
+  });
+
+const pathItems = menuItems
+  .filter((item) => !item.children)
+  .map(itemMapper())
+  .concat(
+    menuItems
+      .filter((item) => item.children)
+      .map((item) => item.children.map(itemMapper(item.key)))
+      .flat()
+  );
 
 function Home() {
   const navigate = useNavigate();
@@ -34,14 +77,14 @@ function Home() {
 
   useEffect(() => {
     const path = location.pathname;
-    const item = menuItems.find((menuItem) => menuItem.path === path);
+    const item = pathItems.find((menuItem) => menuItem.path === path);
     if (item) {
       setSelectedKey(item.key);
     }
   }, [location]);
 
   const onMenuClick = (item) => {
-    const foundItem = menuItems.find((i) => i.key === item.key);
+    const foundItem = pathItems.find((i) => i.key === item.key);
     navigate(foundItem?.path || `/${item.key}`);
   };
 
