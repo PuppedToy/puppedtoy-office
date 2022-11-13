@@ -17,6 +17,11 @@ function errorHandler(error) {
   }
 }
 
+function getAuthorizationHeader() {
+  const token = localStorage.getItem("token");
+  return `Bearer ${token}`;
+}
+
 export async function login(name, password) {
   try {
     const response = await api.post("/auth/login", {
@@ -32,7 +37,11 @@ export async function login(name, password) {
 
 export async function getResourceList() {
   try {
-    const response = await api.get("/resources");
+    const response = await api.get("/resources", {
+      headers: {
+        Authorization: getAuthorizationHeader(),
+      },
+    });
     return response.data;
   } catch (err) {
     errorHandler(err);
@@ -42,7 +51,11 @@ export async function getResourceList() {
 
 export async function getResource(resource) {
   try {
-    const response = await api.get(`/resources/${resource}`);
+    const response = await api.get(`/resources/${resource}`, {
+      headers: {
+        Authorization: getAuthorizationHeader(),
+      },
+    });
     return response.data;
   } catch (err) {
     errorHandler(err);
@@ -52,7 +65,11 @@ export async function getResource(resource) {
 
 export async function createResource(resource, data) {
   try {
-    const response = await api.post(`/resources/${resource}`, data);
+    const response = await api.post(`/resources/${resource}`, data, {
+      headers: {
+        Authorization: getAuthorizationHeader(),
+      },
+    });
     return response.data;
   } catch (err) {
     errorHandler(err);
@@ -62,7 +79,11 @@ export async function createResource(resource, data) {
 
 export async function deleteResource(resource, id) {
   try {
-    const response = await api.delete(`/resources/${resource}/${id}`);
+    const response = await api.delete(`/resources/${resource}/${id}`, {
+      headers: {
+        Authorization: getAuthorizationHeader(),
+      },
+    });
     return response.data;
   } catch (err) {
     errorHandler(err);
@@ -72,7 +93,11 @@ export async function deleteResource(resource, id) {
 
 export async function updateResource(resource, id, data) {
   try {
-    const response = await api.put(`/resources/${resource}/${id}`, data);
+    const response = await api.put(`/resources/${resource}/${id}`, data, {
+      headers: {
+        Authorization: getAuthorizationHeader(),
+      },
+    });
     return response.data;
   } catch (err) {
     errorHandler(err);
