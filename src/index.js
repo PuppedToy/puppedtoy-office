@@ -3,17 +3,24 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Test from "./pages/Test";
 import "antd/dist/antd.dark.min.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    path: "/login",
+    element: <Login />,
   },
   {
-    path: "/test/:userId",
-    element: <Test />,
+    path: "/",
+    element: <Home />,
+    children: [
+      {
+        path: "/test/:userId",
+        element: <Test />,
+      },
+    ],
   },
 ]);
 
