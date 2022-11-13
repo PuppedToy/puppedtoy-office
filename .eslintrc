@@ -1,0 +1,15 @@
+{
+    "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
+    "parserOptions": {
+        "ecmaVersion": 13
+    },
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "linebreak-style": "off",
+        "react/jsx-filename-extension": [1, {
+            "extensions": [".js", ".jsx"]
+        }]
+    }
+}
