@@ -37,6 +37,10 @@ const menuItems = [
         key: "perks",
         label: "Perks",
       },
+      {
+        key: "fortresses",
+        label: "Fortresses",
+      },
     ],
   },
   {

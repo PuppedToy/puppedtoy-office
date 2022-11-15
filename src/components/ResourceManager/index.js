@@ -1,12 +1,20 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Spin, Table, Card, Button } from "antd";
+import { Spin, Table, Card, Button, Popconfirm } from "antd";
 import { JsonEditor } from "jsoneditor-react";
 import Ajv from "ajv";
 
 import "jsoneditor-react/es/editor.min.css";
 
-import { getResource, createResource } from "../../services/api";
+import {
+  getResource,
+  createResource,
+  updateResource,
+  deleteResource,
+} from "../../services/api";
+import { EditableRow, EditableCell } from "../EditableContext";
 
 const ajv = new Ajv({ allErrors: true, verbose: true });
 
@@ -43,7 +51,7 @@ function ResourceManager({ resourceName }) {
   const sample = resourceList.length ? resourceList[0] : {};
   const sampleKeys = sample
     ? Object.keys(sample).filter(
-        (key) => !["_id", "isResource", "appVersion"].includes(key)
+        (key) => !["isResource", "appVersion"].includes(key)
       )
     : [];
 
@@ -57,6 +65,65 @@ function ResourceManager({ resourceName }) {
     setCurrentJson(json);
   };
 
+  const components = {
+    body: {
+      row: EditableRow,
+      cell: EditableCell,
+    },
+  };
+
+  const handleDelete = async (id) => {
+    await deleteResource(resourceName, id);
+    await fetchResourceList();
+  };
+
+  const handleSave = async (newValues, row) => {
+    const [key] = Object.keys(row);
+    if (
+      [
+        "_id",
+        "createdAt",
+        "updatedAt",
+        "appVersion",
+        "isResource",
+        "operation",
+      ].includes(key)
+    ) {
+      return;
+    }
+    await updateResource(resourceName, row._id, newValues);
+    await fetchResourceList();
+  };
+
+  const columns = sampleKeys
+    ? [
+        ...sampleKeys.map((item) => ({
+          title: item,
+          dataIndex: item,
+          onCell: (record) => ({
+            record,
+            editable: true,
+            dataIndex: item,
+            title: item,
+            handleSave,
+          }),
+        })),
+        {
+          title: "operation",
+          dataIndex: "operation",
+          render: (_, record) =>
+            resourceList.length >= 1 ? (
+              <Popconfirm
+                title="Sure to delete?"
+                onConfirm={() => handleDelete(record._id)}
+              >
+                <a href="#">Delete</a>
+              </Popconfirm>
+            ) : null,
+        },
+      ]
+    : [];
+
   return (
     <Card title={resourceName}>
       {isLoading ? (
@@ -68,12 +135,10 @@ function ResourceManager({ resourceName }) {
             Add
           </Button>
           <Table
+            components={components}
             dataSource={resourceList}
-            columns={
-              sampleKeys
-                ? sampleKeys.map((item) => ({ title: item, dataIndex: item }))
-                : []
-            }
+            columns={columns}
+            handleSave={handleSave}
           />
         </>
       )}

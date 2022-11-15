@@ -93,7 +93,7 @@ export async function deleteResource(resource, id) {
 
 export async function updateResource(resource, id, data) {
   try {
-    const response = await api.put(`/resources/${resource}/${id}`, data, {
+    const response = await api.patch(`/resources/${resource}/${id}`, data, {
       headers: {
         Authorization: getAuthorizationHeader(),
       },
