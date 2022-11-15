@@ -1,0 +1,81 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import { Menu } from "antd";
+
+export const menuItems = [
+  {
+    key: "home",
+    path: "/",
+    label: "Home",
+  },
+  {
+    key: "kingslayer",
+    label: "Kingslayer",
+    children: [
+      {
+        key: "new-game",
+        label: "New Game",
+      },
+      {
+        key: "rooms",
+        label: "Rooms",
+      },
+      {
+        key: "crew",
+        label: "Crew",
+      },
+      {
+        key: "needs",
+        label: "Needs",
+      },
+      {
+        key: "perks",
+        label: "Perks",
+      },
+      {
+        key: "fortresses",
+        label: "Fortresses",
+      },
+    ],
+  },
+  {
+    key: "test",
+    path: "/test/PuppedToy",
+    label: "Test",
+  },
+];
+
+const itemMapper =
+  (parent = "") =>
+  (item) => ({
+    ...item,
+    path: item.path || `${parent ? `/${parent}` : ""}/${item.key}`,
+  });
+
+export const pathItems = menuItems
+  .filter((item) => !item.children)
+  .map(itemMapper())
+  .concat(
+    menuItems
+      .filter((item) => item.children)
+      .map((item) => item.children.map(itemMapper(item.key)))
+      .flat()
+  );
+
+export default function NavBar({ selectedKey, onMenuClick }) {
+  return (
+    <Menu
+      onClick={onMenuClick}
+      theme="dark"
+      mode="inline"
+      items={menuItems}
+      selectedKeys={[selectedKey]}
+    />
+  );
+}
+
+NavBar.propTypes = {
+  selectedKey: PropTypes.string.isRequired,
+  onMenuClick: PropTypes.func.isRequired,
+};
