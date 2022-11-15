@@ -78,7 +78,7 @@ function ResourceManager({ resourceName }) {
   };
 
   const handleSave = async (newValues, row) => {
-    const [key] = Object.keys(row);
+    const [key] = Object.keys(newValues);
     if (
       [
         "_id",
