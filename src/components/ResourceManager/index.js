@@ -27,7 +27,20 @@ function ResourceManager({ resourceName }) {
   const fetchResourceList = async () => {
     setResourceList([]);
     setIsLoading(true);
-    const newResourceList = await getResource(resourceName);
+    const result = await getResource(resourceName);
+    if (result.length) {
+      const {
+        _id,
+        appVersion,
+        version,
+        isResource,
+        createdAt,
+        updatedAt,
+        ...newCurrentJson
+      } = result[0];
+      setCurrentJson(newCurrentJson);
+    }
+    const newResourceList = JSON.parse(JSON.stringify(result));
     for (let i = 0; i < newResourceList.length; i += 1) {
       const item = newResourceList[i];
       const itemEntries = Object.entries(item);
@@ -53,18 +66,6 @@ function ResourceManager({ resourceName }) {
       }
     }
     setResourceList(newResourceList);
-    if (newResourceList.length) {
-      const {
-        _id,
-        appVersion,
-        version,
-        isResource,
-        createdAt,
-        updatedAt,
-        ...newCurrentJson
-      } = newResourceList[0];
-      setCurrentJson(newCurrentJson);
-    }
     setIsLoading(false);
   };
 
