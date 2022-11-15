@@ -63,6 +63,20 @@ export async function getResource(resource) {
   }
 }
 
+export async function getResourceItem(resource, id) {
+  try {
+    const response = await api.get(`/resources/${resource}/${id}`, {
+      headers: {
+        Authorization: getAuthorizationHeader(),
+      },
+    });
+    return response.data;
+  } catch (err) {
+    errorHandler(err);
+    throw err;
+  }
+}
+
 export async function createResource(resource, data) {
   try {
     const response = await api.post(`/resources/${resource}`, data, {

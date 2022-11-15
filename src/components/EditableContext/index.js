@@ -84,6 +84,7 @@ export function EditableCell({
         className="editable-cell-value-wrap"
         style={{
           paddingRight: 24,
+          minHeight: "20px",
         }}
         onClick={toggleEdit}
       >

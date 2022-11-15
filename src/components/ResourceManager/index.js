@@ -10,6 +10,7 @@ import "jsoneditor-react/es/editor.min.css";
 
 import {
   getResource,
+  getResourceItem,
   createResource,
   updateResource,
   deleteResource,
@@ -27,6 +28,30 @@ function ResourceManager({ resourceName }) {
     setResourceList([]);
     setIsLoading(true);
     const newResourceList = await getResource(resourceName);
+    for (let i = 0; i < newResourceList.length; i += 1) {
+      const item = newResourceList[i];
+      const itemEntries = Object.entries(item);
+      for (let j = 0; j < itemEntries.length; j += 1) {
+        const [key, value] = itemEntries[j];
+        if (!value) {
+          item[key] = " ";
+        }
+
+        const isReferenceRegex = /^(.+?)\/([0-9a-fA-F]{24})$/;
+        // Check if regex matches and take groups
+        const isReference =
+          value && typeof value === "string" && isReferenceRegex.exec(value);
+        if (isReference) {
+          const [, referenceResource, referenceId] = isReference;
+          // eslint-disable-next-line no-await-in-loop
+          const referencedItem = await getResourceItem(
+            referenceResource,
+            referenceId
+          );
+          item[key] = `${referencedItem?.name} (${value})`;
+        }
+      }
+    }
     setResourceList(newResourceList);
     if (newResourceList.length) {
       const {
