@@ -37,6 +37,10 @@ export const menuItems = [
         key: "fortresses",
         label: "Fortresses",
       },
+      {
+        key: "fortress-rooms",
+        label: "Fortress Rooms",
+      },
     ],
   },
   {
