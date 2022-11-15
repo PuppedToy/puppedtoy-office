@@ -56,12 +56,16 @@ function ResourceManager({ resourceName }) {
           value && typeof value === "string" && isReferenceRegex.exec(value);
         if (isReference) {
           const [, referenceResource, referenceId] = isReference;
-          // eslint-disable-next-line no-await-in-loop
-          const referencedItem = await getResourceItem(
-            referenceResource,
-            referenceId
-          );
-          item[key] = `${referencedItem?.name} (${value})`;
+          try {
+            // eslint-disable-next-line no-await-in-loop
+            const referencedItem = await getResourceItem(
+              referenceResource,
+              referenceId
+            );
+            item[key] = `${referencedItem?.name} (${value})`;
+          } catch (error) {
+            item[key] = `${value} [ERROR NOT FOUND]`;
+          }
         }
       }
     }
