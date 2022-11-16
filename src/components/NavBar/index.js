@@ -48,6 +48,11 @@ export const menuItems = [
     path: "/test/PuppedToy",
     label: "Test",
   },
+  {
+    key: "graph-playground",
+    path: "/graph-playground",
+    label: "Graph Playground",
+  },
 ];
 
 const itemMapper =

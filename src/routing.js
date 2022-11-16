@@ -10,6 +10,7 @@ import KingslayerNeeds from "./pages/Kingslayer/Needs";
 import KingslayerFortresses from "./pages/Kingslayer/Fortresses";
 import KingslayerFortressRooms from "./pages/Kingslayer/FortressRooms";
 import Test from "./pages/Test";
+import GraphPlayground from "./pages/GraphPlayground";
 
 export default [
   {
@@ -51,6 +52,10 @@ export default [
       {
         path: "/test/:userId",
         element: <Test />,
+      },
+      {
+        path: "/graph-playground",
+        element: <GraphPlayground />,
       },
     ],
   },

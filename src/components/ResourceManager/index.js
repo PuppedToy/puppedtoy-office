@@ -19,7 +19,7 @@ import { EditableRow, EditableCell } from "../EditableContext";
 
 const ajv = new Ajv({ allErrors: true, verbose: true });
 
-function ResourceManager({ resourceName }) {
+function ResourceManager({ resourceName, onFetch }) {
   const [resourceList, setResourceList] = useState([]);
   const [currentJson, setCurrentJson] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -70,6 +70,9 @@ function ResourceManager({ resourceName }) {
       }
     }
     setResourceList(newResourceList);
+    if (onFetch) {
+      onFetch(newResourceList);
+    }
     setIsLoading(false);
   };
 
@@ -176,8 +179,13 @@ function ResourceManager({ resourceName }) {
   );
 }
 
+ResourceManager.defaultProps = {
+  onFetch: null,
+};
+
 ResourceManager.propTypes = {
   resourceName: PropTypes.string.isRequired,
+  onFetch: PropTypes.func,
 };
 
 export default ResourceManager;
