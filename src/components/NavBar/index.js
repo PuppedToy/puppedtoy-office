@@ -18,6 +18,10 @@ export const menuItems = [
         label: "New Game",
       },
       {
+        key: "playground",
+        label: "Playground",
+      },
+      {
         key: "rooms",
         label: "Rooms",
       },

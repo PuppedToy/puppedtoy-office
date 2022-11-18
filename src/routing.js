@@ -3,6 +3,7 @@ import React from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import KingslayerNewGame from "./pages/Kingslayer/NewGame";
+import KingslayerPlayground from "./pages/Kingslayer/Playground";
 import KingslayerRooms from "./pages/Kingslayer/Rooms";
 import KingslayerCrew from "./pages/Kingslayer/Crew";
 import KingslayerPerks from "./pages/Kingslayer/Perks";
@@ -24,6 +25,10 @@ export default [
       {
         path: "/kingslayer/new-game",
         element: <KingslayerNewGame />,
+      },
+      {
+        path: "/kingslayer/playground",
+        element: <KingslayerPlayground />,
       },
       {
         path: "/kingslayer/rooms",
