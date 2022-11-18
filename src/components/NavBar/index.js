@@ -34,8 +34,12 @@ export const menuItems = [
         label: "Needs",
       },
       {
-        key: "perks",
-        label: "Perks",
+        key: "traits",
+        label: "Traits",
+      },
+      {
+        key: "stats",
+        label: "Stats",
       },
       {
         key: "fortresses",
