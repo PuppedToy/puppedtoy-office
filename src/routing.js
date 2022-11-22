@@ -9,6 +9,7 @@ import KingslayerCrew from "./pages/Kingslayer/Crew";
 import KingslayerTraits from "./pages/Kingslayer/Traits";
 import KingslayerStats from "./pages/Kingslayer/Stats";
 import KingslayerNeeds from "./pages/Kingslayer/Needs";
+import KingslayerItems from "./pages/Kingslayer/Items";
 import KingslayerFortresses from "./pages/Kingslayer/Fortresses";
 import KingslayerFortressRooms from "./pages/Kingslayer/FortressRooms";
 import Test from "./pages/Test";
@@ -50,6 +51,10 @@ export default [
       {
         path: "/kingslayer/needs",
         element: <KingslayerNeeds />,
+      },
+      {
+        path: "/kingslayer/items",
+        element: <KingslayerItems />,
       },
       {
         path: "/kingslayer/fortresses",

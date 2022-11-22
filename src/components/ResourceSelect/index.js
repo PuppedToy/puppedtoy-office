@@ -15,7 +15,7 @@ function ResourceSelect({ resource, handleChange, nameField }) {
       setResourceItems(newResourceItems);
     };
     fetchResource();
-  });
+  }, [resource]);
 
   return (
     <Select
