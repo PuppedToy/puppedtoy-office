@@ -158,7 +158,7 @@ function ResourceManager({ resourceName, onFetch }) {
     : [];
 
   return (
-    <Card title={resourceName}>
+    <Card title={`Resource Manager - ${resourceName}`}>
       {isLoading ? (
         <Spin />
       ) : (

@@ -1,19 +1,12 @@
 import React from "react";
 import ResourceManager from "../../../components/ResourceManager";
-
-function BulkInsert() {
-  return (
-    <div>
-      <h1>Bulk insert (TODO)</h1>
-    </div>
-  );
-}
+import BulkInserter from "../../../components/BulkInserter";
 
 function KingslayerItems() {
   return (
     <>
-      <BulkInsert />
-      <ResourceManager resourceName="items" />;
+      <BulkInserter resourceName="items" listKeys={["name"]} />
+      <ResourceManager resourceName="items" />
     </>
   );
 }

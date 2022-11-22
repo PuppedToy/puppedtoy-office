@@ -1,34 +1,36 @@
-Kitchen pool:
-    Kettle 
-    Toaster 
-    Microwave oven 
-    Refrigerator (commonly “fridge”) 
-    Dishwasher 
-    Breadbox 
-    Pitcher (or jug) 
-    Blender 
-    Colander 
-    Tureen (or bowl) 
-    Cookware 
-    Frying pan (stainless steel or nonstick)
-    Teapot 
-    Grater
-    Spatula
-    Measuring cups
-    Measuring spoons
-    Cutting board
-    Ladle
-    Strainer
-    Slotted spoon
-    Can opener
-    Mixing bowl
-    Egg slicer
-    Potato peeler 
-    Meat mallet
-    Plate 
-    Glass 
-    Cup (mug) 
-    Regular spoon 
-    Fork 
-    Knife (butter knife, paring knife, steak knife)
-    Bin 
+Kettle
+Toaster
+Microwave oven
+Fridge
+Dishwasher
+Breadbox
+Pitcher
+Blender
+Colander
+Bowl
+Cookware
+Teapot
+Grater
+Spatula
+Measuring cups
+Measuring spoons
+Cutting board
+Ladle
+Strainer
+Slotted spoon
+Can opener
+Mixing bowl
+Egg slicer
+Potato peeler
+Meat mallet
+Plate
+Glass
+Cup
+Mug
+Regular spoon
+Fork
+Butcher knife
+Butter knife
+Paring knife
+Steak knife)
+Bin
