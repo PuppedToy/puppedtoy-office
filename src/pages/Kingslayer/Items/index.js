@@ -5,8 +5,8 @@ import BulkInserter from "../../../components/BulkInserter";
 function KingslayerItems() {
   return (
     <>
-      <BulkInserter resourceName="items" listKeys={["name"]} />
       <ResourceManager resourceName="items" />
+      <BulkInserter resourceName="items" listKeys={["name"]} />
     </>
   );
 }

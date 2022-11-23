@@ -23,6 +23,7 @@ function ResourceManager({ resourceName, onFetch }) {
   const [resourceList, setResourceList] = useState([]);
   const [currentJson, setCurrentJson] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchResourceList = async () => {
     setResourceList([]);
@@ -172,6 +173,10 @@ function ResourceManager({ resourceName, onFetch }) {
             dataSource={resourceList}
             columns={columns}
             handleSave={handleSave}
+            pagination={{
+              current: currentPage,
+              onChange: (page) => setCurrentPage(page),
+            }}
           />
         </>
       )}
