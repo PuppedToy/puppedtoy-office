@@ -10,8 +10,20 @@ export const menuItems = [
     label: "Home",
   },
   {
+    key: "chat",
+    path: "/chat",
+    label: "Chat",
+  },
+  {
+    key: "users",
+    path: "/users",
+    scopes: ["admin"],
+    label: "Users",
+  },
+  {
     key: "kingslayer",
     label: "Kingslayer",
+    scopes: ["admin"],
     children: [
       {
         key: "new-game",
@@ -58,11 +70,13 @@ export const menuItems = [
   {
     key: "test",
     path: "/test/PuppedToy",
+    scopes: ["admin"],
     label: "Test",
   },
   {
     key: "graph-playground",
     path: "/graph-playground",
+    scopes: ["admin"],
     label: "Graph Playground",
   },
 ];
@@ -84,13 +98,37 @@ export const pathItems = menuItems
       .flat()
   );
 
+function deepFilterMenuItems(items, scopes) {
+  if (scopes.includes("owner")) {
+    return items;
+  }
+  return items
+    .filter((item) => {
+      if (!item.scopes) {
+        return true;
+      }
+      return item.scopes.some((scope) => scopes.includes(scope));
+    })
+    .map((item) => {
+      if (item.children) {
+        return {
+          ...item,
+          children: deepFilterMenuItems(item.children, scopes),
+        };
+      }
+      return item;
+    });
+}
+
 export default function NavBar({ selectedKey, onMenuClick }) {
+  const scopes = localStorage.getItem("scopes")?.split(",") || [];
+
   return (
     <Menu
       onClick={onMenuClick}
       theme="dark"
       mode="inline"
-      items={menuItems}
+      items={deepFilterMenuItems(menuItems, scopes)}
       selectedKeys={[selectedKey]}
     />
   );

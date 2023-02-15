@@ -25,9 +25,10 @@ export default function Login() {
       const data = await login(name, password);
       const { token } = data;
       const decodedToken = jwtDecode(token);
-      const { name: decodedName } = decodedToken;
+      const { name: decodedName, scopes } = decodedToken;
       localStorage.setItem("token", token);
       localStorage.setItem("name", decodedName);
+      localStorage.setItem("scopes", scopes);
       navigate("/");
     } catch (err) {
       console.error(err);

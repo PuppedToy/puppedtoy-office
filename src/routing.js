@@ -2,6 +2,8 @@ import React from "react";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Chat from "./pages/Chat";
+import Users from "./pages/Users";
 import KingslayerNewGame from "./pages/Kingslayer/NewGame";
 import KingslayerPlayground from "./pages/Kingslayer/Playground";
 import KingslayerRooms from "./pages/Kingslayer/Rooms";
@@ -24,6 +26,14 @@ export default [
     path: "/",
     element: <Home />,
     children: [
+      {
+        path: "/chat",
+        element: <Chat />,
+      },
+      {
+        path: "/users",
+        element: <Users />,
+      },
       {
         path: "/kingslayer/new-game",
         element: <KingslayerNewGame />,

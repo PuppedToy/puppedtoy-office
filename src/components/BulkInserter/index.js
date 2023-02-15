@@ -54,12 +54,9 @@ function BulkInserter({ resourceName, listKeys }) {
 
   const onClickAddButton = async (bulkInsertData) => {
     const newValues = [];
-    const keysThatAreNotInListKeys = fieldsKeys.filter(
-      (key) => !listKeys.includes(key)
-    );
     const baseObject = {};
-    keysThatAreNotInListKeys.forEach((key) => {
-      baseObject[key] = fields[key];
+    fieldsKeys.forEach((key) => {
+      baseObject[key] = listKeys.includes(key) ? null : bulkInsertData[key];
     });
     listKeys.forEach((key) => {
       const values = bulkInsertData[key].split("\n");

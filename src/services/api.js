@@ -35,6 +35,19 @@ export async function login(name, password) {
   }
 }
 
+export async function register(name, password) {
+  try {
+    const response = await api.post("/auth/register", {
+      name,
+      password,
+    });
+    return response.data;
+  } catch (err) {
+    errorHandler(err);
+    throw err;
+  }
+}
+
 export async function getResourceList() {
   try {
     const response = await api.get("/resources", {
